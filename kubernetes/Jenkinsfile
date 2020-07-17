@@ -66,8 +66,9 @@ containerTemplate(name: 'kubectl', image: 'roffe/kubectl', command: 'cat', ttyEn
 
 		// #6 배포 Stage
     stage('Deploy') { container('kubectl') {
-      sh "kubectl apply -n ${namespace} -f ${deployment}" sh "kubectl apply -n ${namespace} -f ${service}"
-      sh "kubectl get svc -n devops"
+      sh "kubectl apply -n ${namespace} -f ${deployment}"
+      sh "kubectl apply -n ${namespace} -f ${service}"
+      sh "kubectl get svc -n ${namespace}"
 } }
 
 		// Slack - 빌드 성공시
